@@ -1,0 +1,447 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+AU+VIC+Guides&family=Space+Grotesk:wght@300..700&display=swap");
+
+body {
+  margin: 0;
+  background-color: #00000029;
+  font-family: "Space Grotesk", serif;
+}
+
+:root {
+  --grid-size: calc(100vw / 10);
+  --subgrid-size: calc(var(--grid-size) / 5);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.docs {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+}
+
+.docs a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.docs a:hover {
+  text-decoration: underline;
+}
+/* header {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  position: absolute;
+  width: 100%;
+}
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.icon {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  margin: 48px 40px 0 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.burger-icon {
+  opacity: 1;
+  visibility: visible;
+}
+
+.burger-icon.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.close-icon {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.close-icon.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-container {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup-container.visible {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 10px;
+  padding: 10px;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  transition: opacity 0.3s, visibility 0.3s;
+} */
+
+/* Section 1 styles */
+
+.section-1 {
+  background-color: #000000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size),
+    var(--grid-size) var(--grid-size), var(--subgrid-size) var(--subgrid-size),
+    var(--subgrid-size) var(--subgrid-size);
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  background-attachment: fixed;
+}
+
+.section-1 .title {
+  font-size: 120px;
+  margin: 0;
+}
+
+.section-1 .caption {
+  font-size: 24px;
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .section-1 .title {
+    font-size: 100px;
+  }
+  .section-1 .caption {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-1 .title {
+    font-size: 80px;
+  }
+  .section-1 .caption {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-1 .title {
+    font-size: 50px;
+  }
+  .section-1 .caption {
+    font-size: 12px;
+  }
+}
+
+/* Section 2 styles */
+
+@layer base, effect, stick;
+
+@layer base {
+  :root {
+    --font-size-min: 14;
+    --font-size-max: 20;
+    --font-ratio-min: 1.1;
+    --font-ratio-max: 1.33;
+    --font-width-min: 375;
+    --font-width-max: 1500;
+  }
+
+  :where(.section-2) {
+    --fluid-min: calc(
+      var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
+    );
+    --fluid-max: calc(
+      var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
+    );
+    --fluid-preferred: calc(
+      (var(--fluid-max) - var(--fluid-min)) /
+        (var(--font-width-max) - var(--font-width-min))
+    );
+    --fluid-type: clamp(
+      (var(--fluid-min) / 16) * 1rem,
+      ((var(--fluid-min) / 16) * 1rem) -
+        (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+        (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+      (var(--fluid-max) / 16) * 1rem
+    );
+    font-size: var(--fluid-type);
+  }
+
+  body::before {
+    --size: 45px;
+    --line: color-mix(in hsl, canvasText, transparent 70%);
+    content: "";
+    height: 100svh;
+    width: 100vw;
+    position: fixed;
+    background: linear-gradient(90deg, var(--line) 0.2px, white 1px var(--size))
+        50% 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, white 1px var(--size)) 50% 50% /
+        var(--size) var(--size);
+    mask: linear-gradient(-20deg, transparent 5%, white);
+    z-index: -1;
+  }
+}
+
+@layer effect {
+  :root {
+    --start: 0;
+    --end: 360;
+    --lightness: 65%;
+    --base-chroma: 0.3;
+  }
+  ul {
+    --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
+  }
+  li {
+    color: oklch(
+      var(--lightness) var(--base-chroma)
+        calc(var(--start) + (var(--step) * var(--i)))
+    );
+  }
+
+  @supports (animation-timeline: scroll()) and (animation-range: 0% 100%) {
+    li {
+      opacity: 0.2;
+      animation-name: brighten;
+
+      &:first-of-type {
+        opacity: 1;
+        animation-name: dim;
+      }
+      &:last-of-type {
+        opacity: 0.2;
+        animation-name: bright;
+      }
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
+      animation-timeline: view();
+    }
+
+    @keyframes dim {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes bright {
+      0% {
+        opacity: 0.2;
+      }
+      50%,
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes brighten {
+      0%,
+      100% {
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 1;
+        filter: brightness(1.2);
+      }
+    }
+  }
+}
+
+@layer stick {
+  .section-2 {
+    display: flex;
+    font-family: "Montserrat", serif;
+    justify-content: center;
+    line-height: 1.25;
+    width: 100%;
+    font-size: 80px;
+    font-weight: 600;
+    margin: 80px auto;
+  }
+  .section-2 h2 {
+    position: sticky;
+    top: calc(50% - 0.5lh);
+    font-size: inherit;
+    margin: 0;
+    display: inline-block;
+    height: fit-content;
+  }
+  ul {
+    padding-inline: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  h2,
+  li:last-of-type {
+    background: linear-gradient(
+      canvasText 50%,
+      color-mix(in oklch, canvas, canvasText 25%)
+    );
+    background-clip: text;
+    /* color: #0000; */
+  }
+}
+
+@media (max-width: 980px) {
+  .section-2 {
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-2 {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 400px;
+  }
+}
+
+/* Section 3 styles */
+
+.section-3 {
+  overflow: hidden;
+  max-height: 500px;
+}
+
+.reveal-text {
+  font-size: 100px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@media (max-width: 980px) {
+  .section-3 {
+    margin-top: -100px;
+  }
+  .reveal-text {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-3 {
+    margin-top: -200px;
+  }
+  .reveal-text {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-3 {
+    margin-top: -320px;
+  }
+  .reveal-text {
+    font-size: 40px;
+  }
+}
+
+:root {
+  --space: 1rem;
+  --bg: #09090b;
+  --fg: #e3e3e3;
+  --surface-1: #101012;
+  --surface-2: #27272a;
+  --surface-3: #52525b;
+  --ease-out: cubic-bezier(0.5, 1, 0.89, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: var(--fg);
+  background: var(--bg);
+  display: grid;
+  transition: border-color 200ms var(--ease-out);
+  user-select: none;
+
+  > * {
+    grid-area: card;
+    position: relative;
+    z-index: 1;
+  }
+
+  svg {
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    color: var(--surface-3);
+    transition: 300ms var(--ease-out);
+    transition-property: color, scale;
+  }
+
+  button {
+    opacity: 0;
+  }
+
+  &:focus-within {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+
+  &:where(:hover, :focus-within) {
+    border-color: var(--active-color, var(--fg));
+    transition: border-color 800ms var(--ease-in-out);
+  }
+
+  &:where(:hover, :focus-within) svg {
+    color: var(--active-color, var(--fg));
+    scale: 1.1;
+    transition: 300ms var(--ease-in-out);
+  }
+
+  &:where(:hover, :focus-within)::before {
+    opacity: 1;
+  }
+
+  &:where(:hover, :focus-within)::after {
+    opacity: 1;
+  }
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+}
