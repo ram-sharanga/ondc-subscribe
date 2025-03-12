@@ -44,6 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Route for handling subscription requests
 app.post("/on_subscribe", function (req, res) {
+  console.log("Received request on /on_subscribe:", req.body);
   const { challenge } = req.body;
   const answer = decryptAES256ECB(sharedKey, challenge);
   res.status(200).json({ answer });
