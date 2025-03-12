@@ -11,20 +11,6 @@ const ENCRYPTION_PRIVATE_KEY = process.env.encryption_private_key;
 const ONDC_PUBLIC_KEY =
   "MCowBQYDK2VuAyEAduMuZgmtpjdCuxv+Nc49K0cB6tL/Dj3HZetvVN7ZekM=";
 
-const htmlFile = `
-<html>
-  <head>
-    <meta
-      name="ondc-site-verification"
-      content="SIGNED_UNIQUE_REQ_ID"
-    />
-  </head>
-  <body>
-    ONDC Site Verification Page
-  </body>
-</html>
-`;
-
 const privateKey = crypto.createPrivateKey({
   key: Buffer.from(ENCRYPTION_PRIVATE_KEY, "base64"),
   format: "der",
@@ -68,9 +54,7 @@ app.post("/solve_challenge/on_subscribe", function (req, res) {
 // Route for serving the verification file
 app.get("/ondc-site-verification.html", async (req, res) => {
   console.log("ondc-site-verification.html triggered");
-  const signedContent = await signMessage(REQUEST_ID, SIGNING_PRIVATE_KEY);
-  const modifiedHTML = htmlFile.replace(/SIGNED_UNIQUE_REQ_ID/g, signedContent);
-  res.send(modifiedHTML);
+  res.sendFile(path.join(__dirname, "/ondc-site-verification.html"));
 });
 
 // Default route
