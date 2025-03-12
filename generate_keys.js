@@ -11,11 +11,11 @@ function generateKeyPairs() {
   const { privateKey, publicKey } = crypto.generateKeyPairSync("x25519", {
     publicKeyEncoding: {
       type: "spki",
-      format: "der",
+      format: "pem",
     },
     privateKeyEncoding: {
       type: "pkcs8",
-      format: "der",
+      format: "pem",
     },
   });
 
@@ -32,11 +32,38 @@ function generateKeyPairs() {
   };
 }
 
-// Generate keys and output to console
-const keyPairs = generateKeyPairs();
-console.log("Generated Key Pairs:", keyPairs);
+// function generateKeyPairs() {
+//   // Generate the signing key pair using Ed25519
+//   const signingKeyPair = nacl.sign.keyPair();
 
-// Optional: Save keys to a .env file
+//   // Generate the encryption key pair using X25519
+//   const { privateKey, publicKey } = crypto.generateKeyPairSync("x25519", {
+//     publicKeyEncoding: {
+//       type: "spki",
+//       format: "der",
+//     },
+//     privateKeyEncoding: {
+//       type: "pkcs8",
+//       format: "der",
+//     },
+//   });
+
+//   return {
+//     request_id: uuidv4(),
+//     signing_public_key: Buffer.from(signingKeyPair.publicKey).toString(
+//       "base64"
+//     ),
+//     signing_private_key: Buffer.from(signingKeyPair.secretKey).toString(
+//       "base64"
+//     ),
+//     encryption_public_key: Buffer.from(publicKey).toString("base64"),
+//     encryption_private_key: Buffer.from(privateKey).toString("base64"),
+//   };
+// }
+
+const keyPairs = generateKeyPairs();
+
+// Save keys to a .env file
 const envContent = Object.entries(keyPairs)
   .map(([key, value]) => `${key}=${value}`)
   .join("\n");
