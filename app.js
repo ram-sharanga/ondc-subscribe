@@ -52,6 +52,7 @@ app.post("/on_subscribe", function (req, res) {
 
 // Route for serving the verification file
 app.get("/ondc-site-verification.html", async (req, res) => {
+  console.log("ondc-site-verification.htm triggered")
   const signedContent = await signMessage(REQUEST_ID, SIGNING_PRIVATE_KEY);
   const modifiedHTML = htmlFile.replace(/SIGNED_UNIQUE_REQ_ID/g, signedContent);
   res.send(modifiedHTML);
@@ -59,6 +60,7 @@ app.get("/ondc-site-verification.html", async (req, res) => {
 
 // Default route
 app.get("/", (req, res) => {
+  console.log("home route triggered");
   res.sendFile(path.join(__dirname, "/index.html"));
 });
 
