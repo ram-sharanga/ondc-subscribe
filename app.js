@@ -69,7 +69,7 @@ app.get("/", (req, res) => {
 // Health check route
 app.get("/health", (req, res) => res.send("Health OK!!"));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Server up and runnning on port ${port}!`));
 
 // Decrypt using AES-256-ECB
 function decryptAES256ECB(key, encrypted) {
