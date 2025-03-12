@@ -43,16 +43,31 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Route for handling subscription requests
-app.post("/on_subscribe", function (req, res) {
+app.post("/solve_challenge/on_subscribe", function (req, res) {
   console.log("Received request on /on_subscribe:", req.body);
+
   const { challenge } = req.body;
-  const answer = decryptAES256ECB(sharedKey, challenge);
-  res.status(200).json({ answer });
+
+  if (!challenge) {
+    console.error("No challenge received in request body");
+    return res.status(400).json({ error: "Challenge is missing" });
+  }
+
+  console.log("Challenge received:", challenge);
+
+  try {
+    const answer = decryptAES256ECB(sharedKey, challenge);
+    console.log("Decryption successful, responding with answer:", answer);
+    res.status(200).json({ answer });
+  } catch (error) {
+    console.error("Error decrypting challenge:", error);
+    res.status(500).json({ error: "Decryption failed" });
+  }
 });
 
 // Route for serving the verification file
 app.get("/ondc-site-verification.html", async (req, res) => {
-  console.log("ondc-site-verification.htm triggered")
+  console.log("ondc-site-verification.html triggered");
   const signedContent = await signMessage(REQUEST_ID, SIGNING_PRIVATE_KEY);
   const modifiedHTML = htmlFile.replace(/SIGNED_UNIQUE_REQ_ID/g, signedContent);
   res.send(modifiedHTML);
