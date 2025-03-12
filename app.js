@@ -30,25 +30,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Route for handling subscription requests
 app.post("/solve_challenge/on_subscribe", function (req, res) {
-  console.log("Received request on /on_subscribe:", req.body);
-
   const { challenge } = req.body;
-
-  if (!challenge) {
-    console.error("No challenge received in request body");
-    return res.status(400).json({ error: "Challenge is missing" });
-  }
-
-  console.log("Challenge received:", challenge);
-
-  try {
-    const answer = decryptAES256ECB(sharedKey, challenge);
-    console.log("Decryption successful, responding with answer:", answer);
-    res.status(200).json({ answer });
-  } catch (error) {
-    console.error("Error decrypting challenge:", error);
-    res.status(500).json({ error: "Decryption failed" });
-  }
+  const answer = decryptAES256ECB(sharedKey, challenge);
+  const resp = { answer: answer };
+  res.status(200).json(resp);
 });
 
 // Route for serving the verification file
