@@ -6,7 +6,6 @@ const { v4: uuidv4 } = require("uuid");
 function generateKeyPairs() {
   const signingKeyPair = nacl.sign.keyPair();
   const { privateKey, publicKey } = crypto.generateKeyPairSync("x25519", {
-    modulusLength: 2048,
     publicKeyEncoding: {
       type: "spki",
       format: "pem",
