@@ -27,8 +27,8 @@ function generateKeyPairs() {
     signing_private_key: Buffer.from(signingKeyPair.secretKey).toString(
       "base64"
     ),
-    encryption_public_key: Buffer.from(privateKey).toString("base64"),
-    encryption_private_key: Buffer.from(publicKey).toString("base64"),
+    encryption_public_key: Buffer.from(publicKey).toString("base64"),
+    encryption_private_key: Buffer.from(privateKey).toString("base64"),
   };
 }
 
