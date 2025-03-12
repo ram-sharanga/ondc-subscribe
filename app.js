@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Route for handling subscription requests
-app.post("/on_subscribe", function (req, res) {
+app.post("/solve_challenge/on_subscribe", function (req, res) {
   const { challenge } = req.body;
   const answer = decryptAES256ECB(sharedKey, challenge);
   res.status(200).json({ answer });
