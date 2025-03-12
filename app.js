@@ -52,7 +52,7 @@ app.post("/solve_challenge/on_subscribe", function (req, res) {
 });
 
 // Route for serving the verification file
-app.get("/ondc-site-verification.html", async (req, res) => {
+app.get("/ondc-site-verification.html", (req, res) => {
   console.log("ondc-site-verification.html triggered");
   res.sendFile(path.join(__dirname, "/ondc-site-verification.html"));
 });
