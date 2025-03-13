@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const _sodium = require("libsodium-wrappers");
 require("dotenv").config();
 
-const port = 3000;
+const port = process.env.PORT || 8080;
 const REQUEST_ID = process.env.request_id;
 const SIGNING_PRIVATE_KEY = process.env.signing_private_key;
 const ENCRYPTION_PRIVATE_KEY = process.env.encryption_private_key;
