@@ -49,7 +49,7 @@ app.post("/on_subscribe", function (req, res) {
   console.log("/on_subscribe triggered");
   const { challenge } = req.body;
   const answer = decryptAES256ECB(sharedKey, challenge);
-  const resp = { answer: answer };
+  const resp = { answer: "booyah" };
   res.status(200).json(resp);
 });
 
